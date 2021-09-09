@@ -18,7 +18,6 @@ const GuardedRoute = () => {
     const variables = [
       "REACT_APP_PLATFORM_URL",
       "REACT_APP_ORGANIZATION_ID",
-      "REACT_APP_API_KEY",
       "REACT_APP_USER_EMAIL",
     ];
     const reducer = (previousValue: boolean, currentValue: string) =>
