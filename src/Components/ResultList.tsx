@@ -84,7 +84,7 @@ const ResultList: FunctionComponent<{ scrollTarget: RefObject<HTMLElement> }> =
       options: { fieldsToInclude: MovieFields },
     });
 
-    const onScroll = (e: Event) => {
+    const onScroll = () => {
       const scrollBottom =
         scrollTarget.current!.scrollTop + scrollTarget.current!.clientHeight;
       const hiddenSpaceAtBottom =
