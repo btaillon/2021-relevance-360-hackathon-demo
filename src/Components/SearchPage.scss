@@ -1,0 +1,42 @@
+body {
+  overflow: hidden;
+
+  main {
+    overflow: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 5rem;
+
+    &.modal-open {
+      pointer-events: none;
+    }
+
+    $searchbox-area-height: 15rem;
+    .searchbox-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: $searchbox-area-height;
+      z-index: 2;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .vertical-stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdowns {
+      display: grid;
+      margin-top: 1rem;
+      grid-auto-flow: column;
+      gap: 1rem;
+    }
+  }
+}

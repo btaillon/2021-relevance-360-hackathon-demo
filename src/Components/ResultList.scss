@@ -1,0 +1,160 @@
+@use "src/common/theme.scss" as *;
+
+@mixin remove-list-style {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+$thumbnail-width: 25rem;
+$thumbnail-height: 35rem;
+$film-edges-size: 1rem;
+$film-perforations-size: 1.5rem;
+$film-color: black;
+$film-gap-color: $color-background;
+
+@mixin result-list {
+  ul {
+    display: inline-grid;
+    grid-auto-flow: row;
+    gap: $film-edges-size;
+    @include remove-list-style();
+
+    li {
+      overflow: hidden;
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+
+  .list-background {
+    display: inline-grid;
+    grid-template-columns: auto 1fr auto;
+    position: relative;
+
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: $thumbnail-height;
+      background-image: linear-gradient(
+        180deg,
+        $color-background 0,
+        transparent 100%
+      );
+    }
+
+    .tape-edge {
+      background-color: $film-color;
+      width: $film-perforations-size;
+      background-position: 0 0, 30px 30px;
+      background-image: linear-gradient(
+        0deg,
+        $film-color 0,
+        $film-color ($film-edges-size / 2),
+        $film-gap-color ($film-edges-size / 2),
+        $film-gap-color ($film-edges-size / 2 + $film-perforations-size),
+        $film-color ($film-edges-size / 2 + $film-perforations-size),
+        $film-color 100%
+      );
+      background-size: 100% ($film-perforations-size + $film-edges-size);
+      background-repeat: repeat-y;
+      box-sizing: content-box;
+      border: $film-edges-size solid $film-color;
+      border-top-width: 0;
+      border-bottom-width: 0;
+    }
+
+    ul {
+      background-color: $film-color;
+
+      li.fake-result {
+        width: $thumbnail-width;
+        height: $thumbnail-height;
+      }
+
+      &:first-child,
+      &:last-child {
+        height: $thumbnail-height / 2;
+      }
+    }
+
+    @include result-list();
+  }
+
+  .list-results {
+    position: absolute;
+    left: ($film-edges-size * 2 + $film-perforations-size);
+    top: ($film-edges-size + $thumbnail-height / 2);
+
+    @include result-list();
+
+    article {
+      display: grid;
+      grid-template-columns: $thumbnail-width auto;
+      grid-template-areas:
+        "thumbnail title"
+        "thumbnail info"
+        "thumbnail .";
+
+      .thumbnail {
+        grid-area: thumbnail;
+        display: grid;
+        place-items: center;
+        width: $thumbnail-width;
+        height: $thumbnail-height;
+        border-radius: 3px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          color: transparent;
+        }
+      }
+
+      h2,
+      .info {
+        margin-left: 6rem;
+      }
+
+      h2 {
+        grid-area: title;
+
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .info {
+        grid-area: info;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .details-button {
+          margin-top: 1rem;
+          background-color: transparent;
+          border: 1px solid $color-primary;
+          color: $color-primary;
+          border-radius: 0.25rem;
+          padding: 0.5rem;
+          cursor: pointer;
+
+          &:hover {
+            border-color: $color-text;
+            color: $color-text;
+          }
+        }
+      }
+    }
+  }
+}

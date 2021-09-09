@@ -1,0 +1,8 @@
+@use "src/common/theme.scss" as *;
+
+body {
+  color: $color-text;
+  background-color: $color-background;
+  font-family: $font-family;
+  font-size: $font-size;
+}

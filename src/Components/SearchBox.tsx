@@ -1,19 +1,20 @@
-import {FunctionComponent, useEffect, useState, useContext} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import "./SearchBox.scss";
+import SearchIcon from "../icons/search.svg";
+import { FunctionComponent, useEffect, useState, useContext } from "react";
 import {
   buildSearchBox,
   SearchBox as HeadlessSearchBox,
   SearchBoxOptions,
-} from '@coveo/headless';
-import EngineContext from '../common/engineContext';
+} from "@coveo/headless";
+import EngineContext from "../common/engineContext";
+import { Icon } from "./Icon";
 
 interface SearchBoxProps {
   controller: HeadlessSearchBox;
 }
 
 const SearchBoxRenderer: FunctionComponent<SearchBoxProps> = (props) => {
-  const {controller} = props;
+  const { controller } = props;
   const [state, setState] = useState(controller.state);
 
   useEffect(
@@ -22,33 +23,25 @@ const SearchBoxRenderer: FunctionComponent<SearchBoxProps> = (props) => {
   );
 
   return (
-    <Autocomplete
-      inputValue={state.value}
-      onInputChange={(_, newInputValue) => {
-        controller.updateText(newInputValue);
-      }}
-      onChange={() => {
-        controller.submit();
-      }}
-      options={state.suggestions.map((suggestion) => suggestion.rawValue)}
-      freeSolo
-      style={{width: 'auto'}}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          placeholder="Search"
-          variant="outlined"
-          size="small"
-        />
-      )}
-    />
+    <div className="searchbox">
+      <input
+        type="text"
+        placeholder="Search"
+        onChange={(e) => controller.updateText(e.target.value)}
+        onKeyPress={(e) => e.key === "Enter" && controller.submit()}
+        value={state.value}
+      />
+      <button onClick={() => controller.submit()}>
+        <Icon icon={SearchIcon}></Icon>
+      </button>
+    </div>
   );
 };
 
 const SearchBox = () => {
-  const options: SearchBoxOptions = {numberOfSuggestions: 8};
+  const options: SearchBoxOptions = { numberOfSuggestions: 8 };
   const engine = useContext(EngineContext)!;
-  const controller = buildSearchBox(engine, {options});
+  const controller = buildSearchBox(engine, { options });
   return <SearchBoxRenderer controller={controller} />;
 };
 

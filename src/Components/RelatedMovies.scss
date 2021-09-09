@@ -1,0 +1,28 @@
+.related-movies {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    cursor: pointer;
+
+    img,
+    .fake-thumbnail {
+      border-radius: 0.25rem;
+      width: 10.375rem;
+      background-color: black;
+      color: transparent;
+    }
+
+    .fake-thumbnail {
+      aspect-ratio: 166 / 233;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}

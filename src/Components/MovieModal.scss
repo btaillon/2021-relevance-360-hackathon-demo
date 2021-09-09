@@ -1,0 +1,124 @@
+@use "src/common/theme.scss" as *;
+
+.modal-backdrop {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  $darkest-color: rgba(0, 0, 0, 0.8);
+  $lightest-color: rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(
+    90deg,
+    $darkest-color 0%,
+    $lightest-color 30%,
+    $lightest-color 70%,
+    $darkest-color 100%
+  );
+}
+
+.modal {
+  display: inline-flex;
+  flex-direction: column;
+  width: 75rem;
+  height: 50rem;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  background-color: $color-background;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  $title-height: 4rem;
+  .modal-title {
+    display: flex;
+    align-items: flex-end;
+    height: $title-height;
+
+    button {
+      margin-left: auto;
+      aspect-ratio: 1 / 1;
+      height: 100%;
+      padding: 1.5rem;
+      color: $color-text;
+      border: none;
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .modal-content {
+    $content-padding: 1rem;
+    display: flex;
+    padding: $content-padding;
+    flex-grow: 1;
+    height: calc(100% - #{$title-height + 2 * $content-padding});
+
+    .thumbnail {
+      height: 100%;
+      margin-right: 2rem;
+      border-radius: 0.5rem;
+    }
+
+    .info {
+      flex-grow: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 1rem;
+      overflow-y: auto;
+
+      h1 {
+        margin: 0;
+        font-weight: lighter;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      table {
+        th {
+          text-align: left;
+          min-width: max-content;
+          padding: 0.25rem 1rem 0.25rem 0;
+          vertical-align: top;
+          font-weight: normal;
+        }
+
+        td {
+          font-size: 0.9rem;
+        }
+
+        td ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: inline-flex;
+          flex-wrap: wrap;
+          gap: 0.25rem;
+
+          li {
+            padding: 0.25rem;
+            background-color: $color-primary;
+            color: $color-text-dark;
+            border-radius: 5px;
+          }
+        }
+      }
+
+      .related-movies-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        flex-shrink: 0;
+      }
+    }
+  }
+}

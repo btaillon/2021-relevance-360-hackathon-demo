@@ -1,5 +1,5 @@
-import {SearchEngine} from '@coveo/headless';
-import {createContext} from 'react';
+import { SearchEngine } from "@coveo/headless";
+import { createContext } from "react";
 
 const EngineContext = createContext<SearchEngine | null>(null);
 
