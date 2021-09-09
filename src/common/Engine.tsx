@@ -27,8 +27,8 @@ export async function initializeHeadlessEngine() {
       accessToken:
         process.env.REACT_APP_ACCESS_TOKEN || (await getSearchToken()),
       ...(process.env.REACT_APP_ACCESS_TOKEN
-        ? { renewAccessToken: getSearchToken }
-        : {}),
+        ? {}
+        : { renewAccessToken: getSearchToken }),
     },
   });
 }
