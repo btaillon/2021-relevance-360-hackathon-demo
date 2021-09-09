@@ -1,10 +1,6 @@
 import "./SearchPage.scss";
 import React, { createRef, useEffect, useState } from "react";
-import {
-  buildSearchStatus,
-  loadSearchActions,
-  SearchEngine,
-} from "@coveo/headless";
+import { SearchEngine } from "@coveo/headless";
 import { EngineProvider } from "../common/engineContext";
 import ResultList from "./ResultList";
 import SearchBox from "./SearchBox";

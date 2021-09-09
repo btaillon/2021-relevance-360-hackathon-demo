@@ -57,10 +57,10 @@ $film-gap-color: $color-background;
       background-image: linear-gradient(
         0deg,
         $film-color 0,
-        $film-color ($film-edges-size / 2),
-        $film-gap-color ($film-edges-size / 2),
-        $film-gap-color ($film-edges-size / 2 + $film-perforations-size),
-        $film-color ($film-edges-size / 2 + $film-perforations-size),
+        $film-color ($film-edges-size * 0.5),
+        $film-gap-color ($film-edges-size * 0.5),
+        $film-gap-color ($film-edges-size * 0.5 + $film-perforations-size),
+        $film-color ($film-edges-size * 0.5 + $film-perforations-size),
         $film-color 100%
       );
       background-size: 100% ($film-perforations-size + $film-edges-size);
@@ -81,7 +81,7 @@ $film-gap-color: $color-background;
 
       &:first-child,
       &:last-child {
-        height: $thumbnail-height / 2;
+        height: $thumbnail-height * 0.5;
       }
     }
 
@@ -91,7 +91,7 @@ $film-gap-color: $color-background;
   .list-results {
     position: absolute;
     left: ($film-edges-size * 2 + $film-perforations-size);
-    top: ($film-edges-size + $thumbnail-height / 2);
+    top: ($film-edges-size + $thumbnail-height * 0.5);
 
     @include result-list();
 
